@@ -1,34 +1,74 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="machine">
+      <div className="camera"></div>
+      <div className="main">
+        <div className="leftButtonPanel">
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+        </div>
+        <div className="screen"></div>
+        <div className="rightButtonPanel">
+          <button></button>
+          <button></button>
+          <button></button>
+          <button></button>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="operatorPanel">
+        <div className="recipt">
+          <div className="upperArc"></div>
+        </div>
+        <div className="numpadArea">
+          <div className="numpad">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button style={{ backgroundColor: 'yellow', fontSize: '0.6rem' }}>Clear</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button style={{ backgroundColor: 'red', fontSize: '0.6rem' }}>Cancel</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button style={{ backgroundColor: 'green', fontSize: '0.6rem' }}>Enter</button>
+
+            <button></button>
+            <button>0</button>
+            <button></button>
+            <button></button>
+          </div>
+        </div>
+        <div className="cardAccepter">
+          <div className="fingerSpace">
+            <div className="cardReader"></div>
+          </div>
+          <input type="file" accept=".txt" className="cardFile" />
+
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <div className="divider"></div>
+      <div className="cashCollector">
+        <div className="shutter">
+          <div>|</div>
+          <div>|</div>
+          <div>|</div>
+          <div>|</div>
+          <div>|</div>
+          <div>|</div>
+          <div>|</div>
+          <div>|</div>
+          <div>|</div>
+          <div>|</div>
+        </div>
+      </div>
+    </div>
   )
 }
 
