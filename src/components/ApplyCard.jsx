@@ -1,16 +1,18 @@
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { downloadCard } from "../services/cardService";
 
 export default function ApplyCard({ onApplied }) {
 
     const {
         register,
         handleSubmit,
-        formState: { errors, isValid }
+        formState: { errors }
     } = useForm();
 
-    const onSubmit = data => {
+    const onSubmit = async data => {
         console.log(data)
+        await downloadCard(data);
         onApplied();
     }
 
