@@ -1,12 +1,25 @@
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 
-export default function ApplyCard() {
+export default function ApplyCard({ onApplied }) {
+
+    const {
+        register,
+        handleSubmit
+    } = useForm();
+
+    const onSubmit = data => {
+        console.log(data)
+        onApplied();
+    }
+
+
     return (
-        <Form>
+        <Form onSubmit={handleSubmit(onSubmit)}>
             {/* Card Holder Name */}
             <Form.Group className="mb-3">
                 <Form.Label>Card Holder Name</Form.Label>
-                <Form.Control type="text" placeholder="e.g., Nishant Programmer" />
+                <Form.Control type="text" {...register('name')} />
             </Form.Group>
 
             {/* Phone Number */}
@@ -14,7 +27,7 @@ export default function ApplyCard() {
                 <Form.Label>Phone Number (for OTP)</Form.Label>
                 <InputGroup>
                     <InputGroup.Text>+91</InputGroup.Text>
-                    <Form.Control type="tel" placeholder="e.g., 9876543210" />
+                    <Form.Control type="tel" {...register('phoneNumber')} />
                 </InputGroup>
                 <Form.Text className="text-muted">
                     This is a simulator. You can enter any dummy phone number
@@ -28,7 +41,7 @@ export default function ApplyCard() {
                         <Form.Label>Initial Balance</Form.Label>
                         <InputGroup>
                             <InputGroup.Text>₹</InputGroup.Text>
-                            <Form.Control type="number" placeholder="e.g., 1000" />
+                            <Form.Control type="number" {...register('balance')} />
                         </InputGroup>
                     </Form.Group>
                 </Col>
@@ -37,10 +50,20 @@ export default function ApplyCard() {
                 <Col md={6}>
                     <Form.Group className="mb-3">
                         <Form.Label>PIN</Form.Label>
-                        <Form.Control type="password" placeholder="Enter 4-digit PIN" />
+                        <Form.Control type="password" {...register('pin')} />
                     </Form.Group>
                 </Col>
             </Row>
+            <div className="d-flex justify-content-end gap-2">
+
+                <Button variant="secondary">
+                    Close
+                </Button>
+                <Button variant="primary" type="submit">
+                    Download Card
+                </Button>
+
+            </div>
         </Form>
     );
 }

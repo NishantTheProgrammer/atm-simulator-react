@@ -6,7 +6,7 @@ import { Button, Modal } from "react-bootstrap";
 
 
 function App() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -22,16 +22,8 @@ function App() {
           <Modal.Title>Appy for a new Card</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ApplyCard />
+          <ApplyCard onApplied={handleClose} />
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Download Card
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   )
