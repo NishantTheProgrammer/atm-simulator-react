@@ -8,3 +8,14 @@ export const downloadCard = async payload => {
     a.click();
     document.body.removeChild(a);
 }
+
+export const readCardData = file => {
+    return new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = (ev) => {
+            resolve(JSON.parse(atob(ev.target.result)));
+        }
+        reader.onerror = e => reject(e);
+    })
+}

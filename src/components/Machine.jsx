@@ -1,4 +1,5 @@
 import useAd from "../hooks/useAd";
+import CardReader from "./CardReader";
 
 export default function Machine() {
 
@@ -47,13 +48,7 @@ export default function Machine() {
                         <button></button>
                     </div>
                 </div>
-                <div className="cardAccepter">
-                    <div className="fingerSpace">
-                        <div className="cardReader"></div>
-                    </div>
-                    <input type="file" accept=".txt" className="cardFile" />
-
-                </div>
+                <CardReader />
             </div>
             <div className="divider"></div>
             <div className="cashCollector">
