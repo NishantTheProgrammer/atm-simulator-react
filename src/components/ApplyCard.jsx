@@ -5,7 +5,8 @@ export default function ApplyCard({ onApplied }) {
 
     const {
         register,
-        handleSubmit
+        handleSubmit,
+        formState: { errors, isValid }
     } = useForm();
 
     const onSubmit = data => {
@@ -13,13 +14,27 @@ export default function ApplyCard({ onApplied }) {
         onApplied();
     }
 
+    console.log({ errors });
+
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
             {/* Card Holder Name */}
             <Form.Group className="mb-3">
                 <Form.Label>Card Holder Name</Form.Label>
-                <Form.Control type="text" {...register('name')} />
+                <Form.Control type="text"
+                    isInvalid={!!errors.name}
+                    {...register('name', {
+                        required: "Name is required",
+                        maxLength: {
+                            value: 20,
+                            message: "Max length is 20"
+                        }
+                    })} />
+                <Form.Control.Feedback type="invalid">
+                    {errors.name?.message}
+                </Form.Control.Feedback>
+
             </Form.Group>
 
             {/* Phone Number */}
@@ -27,7 +42,15 @@ export default function ApplyCard({ onApplied }) {
                 <Form.Label>Phone Number (for OTP)</Form.Label>
                 <InputGroup>
                     <InputGroup.Text>+91</InputGroup.Text>
-                    <Form.Control type="tel" {...register('phoneNumber')} />
+                
+                    <Form.Control 
+                    isInvalid={!!errors.phoneNumber} 
+                    type="tel" {...register('phoneNumber', {
+                        required: "Phone number is required"
+                    })} />
+                    <Form.Control.Feedback type="invalid">
+                        {errors.phoneNumber?.message}
+                    </Form.Control.Feedback>
                 </InputGroup>
                 <Form.Text className="text-muted">
                     This is a simulator. You can enter any dummy phone number
@@ -41,7 +64,23 @@ export default function ApplyCard({ onApplied }) {
                         <Form.Label>Initial Balance</Form.Label>
                         <InputGroup>
                             <InputGroup.Text>₹</InputGroup.Text>
-                            <Form.Control type="number" {...register('balance')} />
+                            <Form.Control 
+                            isInvalid={!!errors.balance} 
+                            type="number" {
+                                ...register('balance', { 
+                                    required: 'Balance is required',
+                                    min: {
+                                        value: 1000,
+                                        message: 'Minimum allowed value is ₹1000'
+                                    }, 
+                                    max: {
+                                        value: 20_00_000,
+                                        message: 'Minimum allowed value is ₹20,00,000'
+                                    } 
+                                })} />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.balance?.message}
+                            </Form.Control.Feedback>
                         </InputGroup>
                     </Form.Group>
                 </Col>
@@ -50,7 +89,16 @@ export default function ApplyCard({ onApplied }) {
                 <Col md={6}>
                     <Form.Group className="mb-3">
                         <Form.Label>PIN</Form.Label>
-                        <Form.Control type="password" {...register('pin')} />
+                        <Form.Control type="password" isInvalid={!!errors.pin} {...register('pin', {
+                            required: 'Pin is required',
+                            pattern: {
+                                value: /^\d{4}$/,
+                                message: "PIN must be exactly 4 digits",
+                            }
+                        })} />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.pin?.message}
+                        </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
             </Row>
