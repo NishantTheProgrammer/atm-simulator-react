@@ -1,12 +1,14 @@
+import { useSelector } from "react-redux";
 import useAd from "../hooks/useAd";
 import CardReader from "./CardReader";
 
 export default function Machine() {
-
     const { ad } = useAd();
+    const { name, isLogin } = useSelector(state => state.auth);
 
     return (
         <div className="machine">
+            {isLogin && <p>Username: { name }</p>}
             <div className="camera"></div>
             <div className="main">
                 <div className="leftButtonPanel">
